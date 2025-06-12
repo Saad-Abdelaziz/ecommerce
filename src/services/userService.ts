@@ -26,7 +26,7 @@ export const register = async ({
     password:hashedPassword,
   });
   await newUser.save();
-  return {data : generateJWT({firstName,lastName}), statusCode : 200};
+  return {data : generateJWT({email, firstName, lastName}), statusCode : 200};
 };
 
 interface LoginParams {
@@ -47,7 +47,13 @@ export const login = async ({ email, password }: LoginParams) => {
 };
 
 
-const generateJWT =(data : any) => {
+interface JWTPayload {
+  email: string;
+  firstName: string;
+  lastName: string;
+}
+
+const generateJWT = (data: JWTPayload) => {
   // JWT generation logic here
-  return jwt.sign(data,'iGgyU7ux87VjLyTPFtNiFQAxrfOV0zIJ');
+  return jwt.sign(data, 'iGgyU7ux87VjLyTPFtNiFQAxrfOV0zIJ');
 }

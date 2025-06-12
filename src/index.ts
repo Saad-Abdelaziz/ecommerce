@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import userRoute from "./routes/userRoute";
 import productRoute from "./routes/productRoute";
+import cartRoute from "./routes/cartRoute";
 import { seedInitailProducts } from "./services/productService";
 
 const app = express();
@@ -16,6 +17,7 @@ mongoose.connect("mongodb://localhost:27017/ecommerce").then(() => {
 
 app.use('/user/', userRoute);
 app.use('/products', productRoute);
+app.use('/cart',cartRoute)
 
 //seed the products to db
 seedInitailProducts();
